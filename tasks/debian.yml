@@ -17,7 +17,7 @@
 
 - name: Install Task
   ansible.builtin.shell:
-    cmd: ./task_install.sh -- -d -b /usr/local/bin
+    cmd: ./task_install.sh -d -b /usr/local/bin
     chdir: /root
   become: true
   when: task_install_script.stat.exists
