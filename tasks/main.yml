@@ -1,0 +1,12 @@
+---
+- name: Handle installation for Debian
+  ansible.builtin.import_tasks: debian.yml
+  when: ansible_facts['os_family']|lower == 'debian'
+  tags:
+    - task
+
+- name: Handle installation for macOS
+  ansible.builtin.import_tasks: macos.yml
+  when: ansible_facts['os_family']|lower == 'darwin'
+  tags:
+    - task

@@ -1,0 +1,25 @@
+---
+- name: Retrieve Task install script
+  ansible.builtin.get_url:
+    url: https://taskfile.dev/install.sh
+    dest: /root/task_install.sh
+    mode: 0755
+  become: true
+  tags:
+    - task
+
+- name: Register if the Task install script is available
+  ansible.builtin.stat:
+    path: /root/task_install.sh
+  register: task_install_script
+  tags:
+    - task
+
+- name: Install Task
+  ansible.builtin.shell:
+    cmd: ./task_install.sh -- -d -b /usr/local/bin
+    chdir: /root
+  become: true
+  when: task_install_script.stat.exists
+  tags:
+    - task

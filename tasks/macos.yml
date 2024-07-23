@@ -1,0 +1,16 @@
+---
+- name: Check if Homebrew is installed
+  ansible.builtin.command: "/usr/bin/which -s brew"
+  register: brew_check
+  changed_when: false
+  failed_when: false
+  tags:
+    - task
+
+- name: Install Task using Homebrew
+  community.general.homebrew:
+    name: go-task
+    state: present
+  when: brew_check.rc != 0
+  tags:
+    - task
