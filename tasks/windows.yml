@@ -1,0 +1,7 @@
+---
+- name: Install Task using Chocolatey
+  win_chocolatey:
+    name: go-task
+    state: present
+  tags:
+    - task

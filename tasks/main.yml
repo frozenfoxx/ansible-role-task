@@ -10,3 +10,9 @@
   when: ansible_facts['os_family']|lower == 'darwin'
   tags:
     - task
+
+- name: Handle installation for Windows
+  ansible.builtin.import_tasks: windows.yml
+  when: ansible_facts['os_family']|lower == 'windows'
+  tags:
+    - task
